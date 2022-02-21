@@ -3,6 +3,8 @@ package com.marsu.animelist
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.marsu.animelist.databinding.ActivityMainBinding
 
@@ -17,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = binding.bottomNavigationView
         val navController = findNavController(R.id.fragmentContainerView)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNavigationView.setupWithNavController(navController)
 
