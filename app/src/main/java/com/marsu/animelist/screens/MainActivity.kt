@@ -1,4 +1,4 @@
-package com.marsu.animelist
+package com.marsu.animelist.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.marsu.animelist.R
 import com.marsu.animelist.databinding.ActivityMainBinding
 
 private lateinit var binding: ActivityMainBinding

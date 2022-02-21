@@ -1,4 +1,4 @@
-package com.marsu.animelist
+package com.marsu.animelist.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
