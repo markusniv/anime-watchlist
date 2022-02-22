@@ -9,4 +9,8 @@
         android:id="@+id/searchFragment"
         android:title="Search"
         android:icon="@drawable/ic_search" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings" />
 </menu>

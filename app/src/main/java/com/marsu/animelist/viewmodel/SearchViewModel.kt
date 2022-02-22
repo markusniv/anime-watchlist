@@ -1,9 +1,8 @@
 package com.marsu.animelist.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import android.app.AlertDialog
+import android.widget.Toast
+import androidx.lifecycle.*
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.marsu.animelist.App
@@ -26,6 +25,9 @@ class SearchViewModel : ViewModel() {
     val observableEntries: MutableLiveData<List<Entry>> by lazy {
         MutableLiveData<List<Entry>>()
     }
+    val alertObservable: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
 
     init {
         val entryDao = WatchlistDatabase.getDatabase(App.appContext).watchlistDao()
@@ -38,28 +40,47 @@ class SearchViewModel : ViewModel() {
     fun getSearchResults(query: String) {
         viewModelScope.launch(Dispatchers.IO) {
             entryList = mutableListOf()
-            val result = EntryApi.retrofitService.getEntries(query, true);
-            val json : JsonObject = result.asJsonObject
-            val data = json.get("data")
-            val arr = data.asJsonArray
-            for (entry in arr) {
-                val single = entry.asJsonObject
-                val images = single.getAsJsonObject("images").getAsJsonObject("jpg")
-                val episodes : Int? = try {
-                    single.get("episodes").asInt
-                } catch (e : Exception) {
-                    null
+            var page = 1
+            var hasNextPage = true
+            var alerted = false
+
+            while (hasNextPage && page < 5) {
+                val result = EntryApi.retrofitService.getEntries(query, page, true);
+                val json : JsonObject = result.asJsonObject
+                val data = json.get("data")
+                val pagination = json.get("pagination").asJsonObject
+                hasNextPage = pagination.get("has_next_page").asBoolean
+                if (!alerted) {
+                    val totalPages = pagination.get("last_visible_page").asInt
+                    if (totalPages > 5) {
+                        alertObservable.postValue(true)
+                        alerted = true
+                    }
                 }
-                val newEntry = Entry(
-                    single.get("mal_id").asInt,
-                    single.get("title").asString,
-                    images.get("image_url").asString,
-                    single.get("airing").asBoolean,
-                    episodes
-                )
-                entryList.add(newEntry)
+                val arr = data.asJsonArray
+                for (entry in arr) {
+                    val single = entry.asJsonObject
+                    val images = single.getAsJsonObject("images").getAsJsonObject("jpg")
+                    val episodes : Int? = try {
+                        single.get("episodes").asInt
+                    } catch (e : Exception) {
+                        null
+                    }
+                    val newEntry = Entry(
+                        single.get("mal_id").asInt,
+                        single.get("title").asString,
+                        images.get("image_url").asString,
+                        single.get("airing").asBoolean,
+                        episodes
+                    )
+                    entryList.add(newEntry)
+
+                }
+                page++
+                observableEntries.postValue(entryList)
+                Thread.sleep(1000)
             }
-            observableEntries.postValue(entryList)
+            alertObservable.postValue(false)
         }
     }
 }

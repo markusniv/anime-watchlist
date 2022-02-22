@@ -24,6 +24,7 @@ interface EntryApiService {
     @GET("anime")
     suspend fun getEntries(
         @Query("q") q : String,
+        @Query("page") page : Int,
         @Query("sfw") sfw : Boolean
     ) : JsonElement
 }
