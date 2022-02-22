@@ -1,4 +1,4 @@
-package com.marsu.animelist.screens
+package com.marsu.animelist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

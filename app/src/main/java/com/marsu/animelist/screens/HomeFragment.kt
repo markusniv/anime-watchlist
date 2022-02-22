@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.marsu.animelist.R
 import com.marsu.animelist.databinding.FragmentHomeBinding
 
 private lateinit var binding: FragmentHomeBinding

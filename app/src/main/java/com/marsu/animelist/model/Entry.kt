@@ -8,10 +8,11 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "watchlist_table")
 data class Entry(
+    @PrimaryKey
     val mal_id: Int,
     val title: String,
-    val image_src: String,
-    val status: String,
-    val episodes: Int,
-    val episodes_watched: Int,
+    val image: String,
+    val airing: Boolean,
+    val episodes: Int?,
+    val episodes_watched: Int = 0,
 ) : Parcelable

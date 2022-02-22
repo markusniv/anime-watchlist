@@ -1,7 +1,7 @@
 package com.marsu.animelist.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.marsu.animelist.context.App
+import com.marsu.animelist.App
 import com.marsu.animelist.data.WatchlistDatabase
 import com.marsu.animelist.repository.EntryRepository
 
