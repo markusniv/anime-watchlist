@@ -36,8 +36,6 @@ class SearchFragment : Fragment() {
             adapter.setData(entries)
         }
         val alertObserver = Observer<Boolean> { alerted ->
-            println("ALERTED!")
-            println(alerted)
             if (alerted) {
                 Toast.makeText(App.appContext, "Too many search results, displaying only first 5 pages!", Toast.LENGTH_LONG).show()
             }

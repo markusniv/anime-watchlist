@@ -10,9 +10,14 @@ import kotlinx.parcelize.Parcelize
 data class Entry(
     @PrimaryKey
     val mal_id: Int,
+    val type: String,
     val title: String,
     val image: String,
-    val airing: Boolean,
+    val year: Int?,
+    val season: String?,
+    val airedFrom: String?,
+    val airedTo: String?,
+    val score: Int?,
     val episodes: Int?,
     val episodes_watched: Int = 0,
 ) : Parcelable

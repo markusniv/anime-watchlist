@@ -7,6 +7,7 @@
         android:id="@+id/singleSearchEntry">
 
         <RelativeLayout
+            android:id="@+id/singleSearchEntryLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp">
@@ -19,11 +20,12 @@
 
                 <ImageView
                     android:id="@+id/singleSearchEntryImage"
-                    android:layout_width="60dp"
-                    android:layout_height="120dp"
+                    android:layout_width="120dp"
+                    android:layout_height="180dp"
                     />
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/singleSearchEntryTexts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/singleSearchEntryImageBox">
@@ -34,14 +36,58 @@
                     android:text="Anime name"
                     android:textSize="26sp"/>
                 <TextView
-                    android:id="@+id/singleSearchEntryAiring"
+                    android:id="@+id/singleSearchEntryTypeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Airing?"
+                    android:text="Type: "
                     android:layout_below="@id/singleSearchEntryTitle"
                     android:layout_marginTop="20dp"
                     android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/singleSearchEntryType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TV"
+                    android:layout_below="@id/singleSearchEntryTitle"
+                    android:layout_toEndOf="@id/singleSearchEntryTypeText"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/singleSearchEntryAiredText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Started airing: "
+                    android:layout_below="@id/singleSearchEntryTypeText"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/singleSearchEntryAired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Season / Year"
+                    android:layout_below="@id/singleSearchEntryTypeText"
+                    android:layout_toEndOf="@id/singleSearchEntryAiredText"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/singleSearchEntryScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/singleSearchEntryAired"
+                    android:layout_marginTop="20dp"
+                    android:text="Score:"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/singleSearchEntryScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/singleSearchEntryScoreText"
+                    android:layout_below="@id/singleSearchEntryAired"
+                    android:layout_marginLeft="30dp"
+                    android:text="0.0"
+                    android:textSize="40sp"/>
             </RelativeLayout>
+
 
         </RelativeLayout>
 

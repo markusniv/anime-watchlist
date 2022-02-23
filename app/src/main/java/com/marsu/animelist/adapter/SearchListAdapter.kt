@@ -24,13 +24,28 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(entryList[position]) {
+                // Load poster image
                 Picasso.get().load(this.image).into(binding.singleSearchEntryImage)
-                binding.singleSearchEntryTitle.text = this.title
-                if (this.airing) {
-                    binding.singleSearchEntryAiring.text = "Yes"
-                } else {
-                    binding.singleSearchEntryAiring.text = "No"
+                // Load title, if title longer than 15 characters cut it
+                var title = this.title
+                if (this.title.length > 15) title = "${this.title.take(15)}..."
+                binding.singleSearchEntryTitle.text = title
+                // Load type
+                binding.singleSearchEntryType.text = this.type
+                // Display year and season if TV, otherwise release date
+                var airedText = "Started airing: "
+                var airedDate = if (this.season != null) "${this.season} / ${this.year}"
+                else "Unknown"
+                if (this.type != "TV") {
+                    airedText = "Released: "
+                    airedDate = if (this.airedFrom != null) this.airedFrom.split("T")[0]
+                    else "Unknown"
                 }
+                binding.singleSearchEntryAiredText.text = airedText
+                binding.singleSearchEntryAired.text = airedDate
+                // Load score if available
+                if (this.score != null) binding.singleSearchEntryScore.text = this.score.toString()
+                else binding.singleSearchEntryScore.text = "N/A"
             }
         }
     }

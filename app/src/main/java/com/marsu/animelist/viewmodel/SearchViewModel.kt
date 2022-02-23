@@ -61,17 +61,48 @@ class SearchViewModel : ViewModel() {
                 for (entry in arr) {
                     val single = entry.asJsonObject
                     val images = single.getAsJsonObject("images").getAsJsonObject("jpg")
+                    val aired = single.getAsJsonObject("aired")
                     val episodes : Int? = try {
                         single.get("episodes").asInt
                     } catch (e : Exception) {
                         null
                     }
+                    val year : Int? = try {
+                        single.get("year").asInt
+                    } catch (e : Exception) {
+                        null
+                    }
+                    val season : String? = try {
+                        single.get("season").asString.replaceFirstChar { it.uppercase() }
+                    } catch (e : Exception) {
+                        null
+                    }
+                    val airedFrom : String? = try {
+                        aired.get("from").asString.split("T")[0]
+                    } catch (e : Exception) {
+                        null
+                    }
+                    val airedTo : String? = try {
+                        aired.get("to").asString.split("T")[0]
+                    } catch (e : Exception) {
+                        null
+                    }
+                    val score : Int? = try {
+                        single.get("score").asInt
+                    } catch (e : Exception) {
+                        null
+                    }
                     val newEntry = Entry(
                         single.get("mal_id").asInt,
+                        single.get("type").asString,
                         single.get("title").asString,
                         images.get("image_url").asString,
-                        single.get("airing").asBoolean,
-                        episodes
+                        year,
+                        season,
+                        airedFrom,
+                        airedTo,
+                        score,
+                        0
                     )
                     entryList.add(newEntry)
 
