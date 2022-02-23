@@ -1,6 +1,7 @@
 package com.marsu.animelist.screens
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -35,6 +36,13 @@ class SettingsFragment : Fragment() {
                 .setPositiveButton("Yes"
                 ) { _, _ ->
                     App.sfw = sfwSwitch.isChecked
+                    val sharedPref = App.appContext.getSharedPreferences(
+                        "SETTINGS_PREF", Context.MODE_PRIVATE
+                    )
+                    with (sharedPref.edit()) {
+                        putBoolean("SFW", App.sfw)
+                        apply()
+                    }
                 }
                 .setNegativeButton("No"
                 ) { dialog, _ ->
@@ -43,9 +51,7 @@ class SettingsFragment : Fragment() {
                 }
             builder.show()
         }
-        sfwSwitch.setOnCheckedChangeListener { switch, isChecked ->
 
-        }
         return binding.root;
     }
 

@@ -12,5 +12,9 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
+        val sharedPref = appContext.getSharedPreferences(
+            "SETTINGS_PREF", Context.MODE_PRIVATE
+        )
+        sfw = (sharedPref.getBoolean("SFW", true))
     }
 }
