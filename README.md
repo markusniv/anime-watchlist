@@ -6,4 +6,5 @@ A native Android application written in Kotlin that allows users to search the M
 ## Author
 
 Markus Nivasalo / 2022
+
 Email: _markus.nivasalo (at) outlook.com_
