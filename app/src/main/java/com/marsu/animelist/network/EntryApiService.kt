@@ -22,10 +22,15 @@ private val retrofit = Retrofit.Builder()
 
 interface EntryApiService {
     @GET("anime")
-    suspend fun getEntries(
+    suspend fun getEntriesSfw(
         @Query("q") q : String,
         @Query("page") page : Int,
         @Query("sfw") sfw : Boolean
+    ) : JsonElement
+    @GET("anime")
+    suspend fun getEntries(
+        @Query("q") q : String,
+        @Query("page") page : Int,
     ) : JsonElement
 }
 

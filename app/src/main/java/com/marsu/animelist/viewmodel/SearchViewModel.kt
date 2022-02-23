@@ -45,7 +45,8 @@ class SearchViewModel : ViewModel() {
             var alerted = false
 
             while (hasNextPage && page < 5) {
-                val result = EntryApi.retrofitService.getEntries(query, page, true);
+                val result = if (App.sfw) EntryApi.retrofitService.getEntriesSfw(query, page, App.sfw);
+                else EntryApi.retrofitService.getEntries(query, page);
                 val json : JsonObject = result.asJsonObject
                 val data = json.get("data")
                 val pagination = json.get("pagination").asJsonObject
